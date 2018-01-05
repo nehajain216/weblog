@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Blog Template for Bootstrap</title>
+
+<!-- Bootstrap core CSS -->
+<link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet" />
+
+
+<!-- Custom styles for this template -->
+<link href="/css/blog.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+	<div class="blog-masthead">
+		<div class="container">
+			<nav class="blog-nav">
+				<ul class="nav navbar-nav">
+					<li><a class="blog-nav-item" th:href="@{/}">Weblog</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a class="blog-nav-item" href="#">My Books</a></li>
+					<li><a class="blog-nav-item" href="#">About</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+	<div class="container">
+
+		<div class="row">
+
+			<div layout:fragment="content">
+				
+			</div>
+			<!-- /.blog-main -->
+
+			<div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+				<div class="sidebar-module sidebar-module-inset">
+					<h4>ABOUT</h4>
+					<p>Neha Jain is a software engineer with more than 8 years of experience in Clinical Domain using clinical tools like Central Designer and InForm.
+					Now she has moved to Java development</p>
+				</div>
+				<div class="sidebar-module">
+					<h4>CATEGORIES</h4>
+					<ol class="list-unstyled">
+						<li  th:each="category : ${categories}">
+							<span class="glyphicon glyphicon-folder-open"></span>&nbsp;
+							<a th:href="@{'/category/'+${category.name}}" th:text="${category.name}"></a>
+						</li>
+					</ol>
+				</div>
+				<div class="sidebar-module">
+					<h4>TAGS</h4>
+					<ol class="list-unstyled">
+						<li  th:each="tag : ${tags}">
+							<span class="glyphicon glyphicon-tag"></span>&nbsp;
+							<a th:href="@{'/tag/'+${tag.name}}" th:text="${tag.name}"></a>
+						</li>
+					</ol>
+				</div>
+			</div>
+			<!-- /.blog-sidebar -->
+
+		</div>
+		<!-- /.row -->
+
+	</div>
+	<!-- /.container -->
+
+	<footer class="blog-footer">
+		<p>weblog</p>
+	</footer>
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+
+	<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

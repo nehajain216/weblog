@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<title>Weblog</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<div class="col-sm-8 blog-main">
+			<div class="blog-post">
+				<h2 class="blog-post-title" th:text="${post.title}"></h2>
+				<p class="blog-post-meta" th:text="${post.createdOn}"></p>
+				<p class="label label-primary" th:text="${post.category.name}"></p>
+				<p >
+					<span class="label label-primary" th:each="tag: ${post.tags}" th:text="${tag.name}"></span>
+				</p>
+				<p th:utext="${post.content}"></p>
+			</div>
+			<div>
+				<h2 class="page-header">Comments</h2>
+				<section class="comment-list" >
+					<article class="row" th:if="${not #lists.isEmpty(post.comments)}" th:each="comment: ${post.comments}">
+						<div class="col-md-10 col-sm-10">
+							<div class="panel panel-default arrow left">
+								<div class="panel-body">
+									<header class="text-left">
+										<div class="comment-user">
+											<i class="fa fa-user" th:text="${comment.name}"></i>
+										</div>
+										<time class="comment-date" datetime="16-12-2014 01:05">
+											<i class="fa fa-clock-o" th:text="${comment.createdOn}"></i>
+										</time>
+									</header>
+									<div class="comment-post">
+										<p th:text="${comment.content}"></p>
+									</div>
+									<p class="text-right">
+										<a href="#" class="btn btn-default btn-sm"><i
+											class="fa fa-reply"></i> reply</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</article>
+				</section>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
