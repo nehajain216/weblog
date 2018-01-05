@@ -11,7 +11,7 @@
 		<div class="col-sm-8 blog-main">
 			<div class="blog-post">
 				<h2 class="blog-post-title" th:text="${post.title}"></h2>
-				<p class="blog-post-meta" th:text="${post.createdOn}"></p>
+				<p class="blog-post-meta" th:text="${#temporals.format(post.createdOn,'dd-MMM-yyyy')}"></p>
 				<p class="label label-primary" th:text="${post.category.name}"></p>
 				<p >
 					<span class="label label-primary" th:each="tag: ${post.tags}" th:text="${tag.name}"></span>
@@ -30,7 +30,7 @@
 											<i class="fa fa-user" th:text="${comment.name}"></i>
 										</div>
 										<time class="comment-date" datetime="16-12-2014 01:05">
-											<i class="fa fa-clock-o" th:text="${comment.createdOn}"></i>
+											<i class="fa fa-clock-o" th:text="${#temporals.format(comment.createdOn,'dd-MMM-yyyy')}"></i>
 										</time>
 									</header>
 									<div class="comment-post">

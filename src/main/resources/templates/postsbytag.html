@@ -11,7 +11,7 @@
 		<div class="col-sm-8 blog-main">
 			<div class="blog-post" th:each="post : ${tag.posts}">
 				<a class="blog-post-title" th:text="${post.title}" th:href="@{'/posts/'+${post.id}}"></a>
-				<p class="blog-post-meta" th:text="${post.createdOn}"></p>
+				<p class="blog-post-meta" th:text="${#temporals.format(post.createdOn,'dd-MMM-yyyy')}"></p>
 				<p th:utext="${#strings.substring(post.content,0,250)+'...'}"></p>
 				<p><a class="btn btn-primary btn-lg" th:href="@{'/posts/'+${post.id}}" role="button">Continue Reading</a></p>
 			</div>

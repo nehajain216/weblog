@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-		layout:decorator="layout">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
 <head>
 <title>Weblog</title>
 </head>
@@ -10,10 +10,32 @@
 	<div layout:fragment="content">
 		<div class="col-sm-8 blog-main">
 			<div class="blog-post" th:each="post : ${allPosts}">
-				<a class="blog-post-title" th:text="${post.title}" th:href="@{'/posts/'+${post.id}}"></a>
-				<p class="blog-post-meta" th:text="${post.createdOn}"></p>
+				<a class="blog-post-title" th:text="${post.title}"
+					th:href="@{'/posts/'+${post.id}}"></a>
+				<p class="blog-post-meta"
+					th:text="${#temporals.format(post.createdOn,'dd-MMM-yyyy')}"></p>
 				<p th:utext="${#strings.substring(post.content,0,250)+'...'}"></p>
-				<p><a class="btn btn-primary btn-lg" th:href="@{'/posts/'+${post.id}}" role="button">Continue Reading</a></p>
+				<p>
+					<a class="btn btn-primary btn-lg" th:href="@{'/posts/'+${post.id}}"
+						role="button">Continue Reading</a>
+				</p>
+			</div>
+			<nav>
+				<ul class="pager">
+					<li><a th:class="${allPosts.hasPrevious()}? active: disabled"
+						th:href="@{/}">First</a></li>
+					<li><a th:class="${allPosts.hasPrevious()}? active: disabled"
+						th:href="@{/(page=${currentPage-1})}">Previous</a></li>
+					<li><a
+						th:class="${allPosts.hasNext()}? active: disabled"
+						th:href="@{/(page=${currentPage+1})}">Next</a></li>
+					<li><a
+						th:class="${allPosts.hasNext()}? active: disabled"
+						th:href="@{/(page=${allPosts.totalPages-1})}">Last</a></li>
+				</ul>
+			</nav>
+			<div>
+				<!-- <span th:text="${archival.minYear}"></span> <span th:text="${maxYear}"></span> -->
 			</div>
 		</div>
 	</div>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -38,33 +38,43 @@
 
 		<div class="row">
 
-			<div layout:fragment="content">
-				
-			</div>
+			<div layout:fragment="content"></div>
 			<!-- /.blog-main -->
 
 			<div class="col-sm-3 col-sm-offset-1 blog-sidebar">
 				<div class="sidebar-module sidebar-module-inset">
 					<h4>ABOUT</h4>
-					<p>Neha Jain is a software engineer with more than 8 years of experience in Clinical Domain using clinical tools like Central Designer and InForm.
-					Now she has moved to Java development</p>
+					<p>Neha Jain is a software engineer with more than 8 years of
+						experience in Clinical Domain using clinical tools like Central
+						Designer and InForm. Now she has moved to Java development</p>
 				</div>
 				<div class="sidebar-module">
 					<h4>CATEGORIES</h4>
 					<ol class="list-unstyled">
-						<li  th:each="category : ${categories}">
-							<span class="glyphicon glyphicon-folder-open"></span>&nbsp;
-							<a th:href="@{'/category/'+${category.name}}" th:text="${category.name}"></a>
-						</li>
+						<li th:each="category : ${categories}"><span
+							class="glyphicon glyphicon-folder-open"></span>&nbsp; <a
+							th:href="@{'/category/'+${category.name}}"
+							th:text="${category.name}"></a></li>
 					</ol>
+				</div>
+				<div class="btn-group">
+					<h4>ARCHIVE</h4>
+					<button type="button" class="btn btn-default dropdown-toggle"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Select Month <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a href="#">Action</a></li>
+						<li><a href="#">Another action</a></li>
+						<li><a href="#">Something else here</a></li>
+					</ul>
 				</div>
 				<div class="sidebar-module">
 					<h4>TAGS</h4>
 					<ol class="list-unstyled">
-						<li  th:each="tag : ${tags}">
-							<span class="glyphicon glyphicon-tag"></span>&nbsp;
-							<a th:href="@{'/tag/'+${tag.name}}" th:text="${tag.name}"></a>
-						</li>
+						<li th:each="tag : ${tags}"><span
+							class="glyphicon glyphicon-tag"></span>&nbsp; <a
+							th:href="@{'/tag/'+${tag.name}}" th:text="${tag.name}"></a></li>
 					</ol>
 				</div>
 			</div>
