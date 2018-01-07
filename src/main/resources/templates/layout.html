@@ -59,15 +59,13 @@
 				</div>
 				<div class="btn-group">
 					<h4>ARCHIVE</h4>
-					<button type="button" class="btn btn-default dropdown-toggle"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Select Month <span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-						<li><a href="#">Action</a></li>
-						<li><a href="#">Another action</a></li>
-						<li><a href="#">Something else here</a></li>
-					</ul>
+					<ol class="list-unstyled">
+						<li th:each="archival : ${archivals}"><span
+							class="glyphicon glyphicon-folder-open"></span>&nbsp; 
+							<a th:href="@{'/archival/'+${archival.year}+'-'+${archival.month}}"
+							th:text="${T(java.time.Month).of(archival.month).getDisplayName(T(java.time.format.TextStyle).SHORT,T(java.util.Locale).ENGLISH)}+' '+${archival.year}+' ('+${archival.count}+')'"></a></li>
+					</ol>
+					
 				</div>
 				<div class="sidebar-module">
 					<h4>TAGS</h4>

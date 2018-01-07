@@ -1,7 +1,6 @@
 package com.nj.weblog.web.controllers;
 
-import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.nj.weblog.entities.Category;
 import com.nj.weblog.entities.Post;
 import com.nj.weblog.entities.Tag;
+import com.nj.weblog.models.Archival;
 import com.nj.weblog.repositories.CategoryRepository;
 import com.nj.weblog.repositories.PostRepository;
 import com.nj.weblog.repositories.TagRepository;
@@ -65,6 +65,14 @@ public class HomeController
 		return "postsbytag";
 	}
 	
+	@GetMapping("/archival/{year}-{month}")
+	public String getByArchival(@PathVariable int year, @PathVariable int month, Model model)
+	{
+		List<Post> posts = postRepository.findByArchival(month, year);
+		model.addAttribute("posts",posts);
+		return "postsbyarchival";
+	}
+	
 	@ModelAttribute(name="categories")
 	public List<Category> allCategories()
 	{
@@ -77,38 +85,11 @@ public class HomeController
 		return tagRepository.findAll();
 	}
 	
-	@ModelAttribute(name="archival")
-	public Model archival(Model model)
+	@ModelAttribute(name="archivals")
+	public List<Archival> archival(Model model)
 	{
-		List<Post> allPost = postRepository.findAll();
-		List<LocalDate> dates = new ArrayList<>();
-		for (Post post : allPost) {
-			dates.add(post.getCreatedOn());
-		}
-		
-		int minYear = Collections.min(dates).getYear();
-		int maxYear = Collections.max(dates).getYear();
-		Map<String,List<Integer>> months = new HashMap<>();
-		
-			for (LocalDate date : dates) 
-			{
-				for (int i = minYear; i <= maxYear; i++) 
-				{
-					if(date.getYear() == i)
-					{
-						date.getMonth();
-					}
-				}
-				
-			}
-		
-		
-		
-		/*model.addAttribute("minYear", minYear);
-		model.addAttribute("maxYear", maxYear);*/
-		
-		return model;
-		
+		List<Archival> archivals = postRepository.findByCreatedOn();
+		return archivals;
 	}
 	
 }
