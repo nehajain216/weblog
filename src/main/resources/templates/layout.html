@@ -27,6 +27,8 @@
 					<li><a class="blog-nav-item" th:href="@{/}">Weblog</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
+					<li><a class="blog-nav-item" th:href="@{/posts/new}">New Post</a></li>
+					<li><a class="blog-nav-item" th:href="@{/posts/admin}">Admin</a></li>
 					<li><a class="blog-nav-item" href="#">My Books</a></li>
 					<li><a class="blog-nav-item" href="#">About</a></li>
 				</ul>
@@ -34,7 +36,7 @@
 		</div>
 	</div>
 
-	<div class="container">
+	<div class="container blog-header">
 
 		<div class="row">
 
@@ -61,11 +63,11 @@
 					<h4>ARCHIVE</h4>
 					<ol class="list-unstyled">
 						<li th:each="archival : ${archivals}"><span
-							class="glyphicon glyphicon-folder-open"></span>&nbsp; 
-							<a th:href="@{'/archival/'+${archival.year}+'-'+${archival.month}}"
+							class="glyphicon glyphicon-folder-close"></span>&nbsp; <a
+							th:href="@{'/archival/'+${archival.year}+'-'+${archival.month}}"
 							th:text="${T(java.time.Month).of(archival.month).getDisplayName(T(java.time.format.TextStyle).SHORT,T(java.util.Locale).ENGLISH)}+' '+${archival.year}+' ('+${archival.count}+')'"></a></li>
 					</ol>
-					
+
 				</div>
 				<div class="sidebar-module">
 					<h4>TAGS</h4>

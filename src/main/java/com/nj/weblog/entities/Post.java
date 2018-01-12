@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name="posts")
 public class Post {
@@ -24,8 +26,12 @@ public class Post {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	
+	@NotEmpty(message="Title cannot be empty")
 	private String title;
 	@Column(length=2000)
+	
+	@NotEmpty(message="Content cannot be empty")
 	private String content;
 	private LocalDate createdOn;
 		
@@ -34,7 +40,7 @@ public class Post {
 	private List<Comment> comments;
 	
 	@ManyToOne
-	@JoinColumn(name="created_by", nullable=false)
+	@JoinColumn(name="created_by")
 	private User createdBy;
 	
 	@ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.MERGE})
@@ -48,7 +54,7 @@ public class Post {
 	)
 	private Set<Tag> tags;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne(cascade= {CascadeType.PERSIST,CascadeType.MERGE})
 	@JoinColumn(name="category_id")
 	private Category category;
 

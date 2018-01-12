@@ -14,7 +14,10 @@
 					th:href="@{'/posts/'+${post.id}}"></a>
 				<p class="blog-post-meta"
 					th:text="${#temporals.format(post.createdOn,'dd-MMM-yyyy')}"></p>
-				<p th:utext="${#strings.substring(post.content,0,250)+'...'}"></p>
+				<div>
+					<p th:if="${#strings.length(post.content) &gt; 250} " th:utext="${#strings.substring(post.content,0,250)+'...'}"></p>
+					<p th:if="${#strings.length(post.content) &lt; 251} " th:utext="${post.content}"></p>
+				</div>
 				<p>
 					<a class="btn btn-primary btn-lg" th:href="@{'/posts/'+${post.id}}"
 						role="button">Continue Reading</a>

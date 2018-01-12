@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.nj.weblog.entities.Post;
 import com.nj.weblog.models.Archival;
 
+@Repository
 public interface PostRepository extends JpaRepository<Post, Integer>  {
 
 	@Query(value="SELECT new com.nj.weblog.models.Archival(COUNT(p.id), MONTH(p.createdOn), YEAR(p.createdOn)) FROM Post p GROUP BY YEAR(p.createdOn), MONTH(p.createdOn)")
